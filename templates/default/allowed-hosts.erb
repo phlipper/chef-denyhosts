@@ -1,0 +1,14 @@
+#
+# The first 3 parts of the IP address must be provided (eg. 1.2.3.)
+# The last part of the IP address can be a wildcard.
+# The wildcard can be given with an asterisk -or- as a range.
+#
+# This line prevents all IP address in the 1.1.1 network from being blocked
+# 1.1.1.*
+#
+# This line prevents IP addresses in the range 1.1.1.6 to 1.1.1.23 from being blocked
+# 1.1.1.[6-23]
+# the following line prevents DenyHosts from blocking the host foo
+# foo
+
+<%= node[:denyhosts][:allowed_hosts].join("\n") %>

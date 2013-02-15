@@ -22,3 +22,17 @@ default["denyhosts"]["smtp_host"]     = "localhost"
 default["denyhosts"]["smtp_port"]     = "25"
 default["denyhosts"]["smtp_from"]     = "denyhosts@localhost"
 default["denyhosts"]["allowed_hosts"] = []
+default["denyhosts"]["secure_log"]    = case node['platform_family']
+                                        when "rhel", "fedora"
+                                          "/var/log/secure"
+                                        when "freebsd", "openbsd"
+                                          "/var/log/auth.log"
+                                        when "suse"
+                                          "/var/log/messages"
+                                        when "mac_os_x"
+                                          "/private/var/log/asl.log"
+                                        when "debian"
+                                          "/var/log/auth.log"
+                                        else
+                                          "/var/log/auth.log"
+                                        end

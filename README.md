@@ -11,6 +11,8 @@ The following platforms are supported by this cookbook, meaning that the recipes
 
 * Ubuntu
 * Debian
+* RedHat
+* CentOS
 
 
 # ATTRIBUTES
@@ -44,6 +46,12 @@ The default is `denyhosts@localhost`.
 Hostnames that will always be allowed to connect.
 
 The default is `[]`.
+
+## `secure_log`
+
+The log file that contains sshd logging info.
+
+The default is based on your platform.
 
 
 # USAGE

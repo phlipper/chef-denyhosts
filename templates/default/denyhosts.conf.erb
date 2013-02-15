@@ -25,7 +25,9 @@
 #SECURE_LOG=/private/var/log/system.log
 #
 # Debian:
-SECURE_LOG = /var/log/auth.log
+#SECURE_LOG = /var/log/auth.log
+
+SECURE_LOG = <%= node[:denyhosts][:secure_log] %>
 ########################################################################
 
 ########################################################################

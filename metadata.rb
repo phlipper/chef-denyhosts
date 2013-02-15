@@ -37,4 +37,4 @@ attribute "denyhosts/secure_log",
   :display_name => "Secure log location",
   :description  => "The log file that contains sshd logging info.",
   :type => "string",
-  :default => "/var/log/auth.log"
+  :calculated => true

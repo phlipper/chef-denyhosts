@@ -49,7 +49,7 @@ The default is `[]`.
 
 The log file that contains sshd logging info.
 
-The default is `/var/log/auth.log`.
+The default is based on your platform.
 
 
 # USAGE

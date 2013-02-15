@@ -22,3 +22,4 @@ default["denyhosts"]["smtp_host"]     = "localhost"
 default["denyhosts"]["smtp_port"]     = "25"
 default["denyhosts"]["smtp_from"]     = "denyhosts@localhost"
 default["denyhosts"]["allowed_hosts"] = []
+default["denyhosts"]["secure_log"]    = "/var/log/auth.log"

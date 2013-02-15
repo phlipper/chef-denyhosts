@@ -32,3 +32,9 @@ attribute "denyhosts/allowed_hosts",
   :display_name => "Allowed hosts",
   :description  => "Hostnames that will always be allowed to connect",
   :default      => []
+
+attribute "denyhosts/secure_log",
+  :display_name => "Secure log location",
+  :description  => "The log file that contains sshd logging info.",
+  :type => "string",
+  :default => "/var/log/auth.log"

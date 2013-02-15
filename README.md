@@ -45,6 +45,12 @@ Hostnames that will always be allowed to connect.
 
 The default is `[]`.
 
+## `secure_log`
+
+The log file that contains sshd logging info.
+
+The default is `/var/log/auth.log`.
+
 
 # USAGE
 

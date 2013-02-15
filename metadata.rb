@@ -4,7 +4,7 @@ license          "Apache 2.0"
 description      "Installs denyhosts"
 version          "0.1"
 
-%w{ubuntu debian}.each do |os|
+%w{ubuntu debian redhat centos}.each do |os|
   supports os
 end
 

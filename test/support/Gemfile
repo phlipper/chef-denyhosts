@@ -1,5 +1,5 @@
 source "https://rubygems.org"
 
 gem "rake"
-gem "foodcritic"
+gem "foodcritic", platform: :mri_19
 gem "chef"

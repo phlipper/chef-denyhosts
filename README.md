@@ -1,4 +1,4 @@
-# chef-denyhosts
+# chef-denyhosts [![Build Status](https://travis-ci.org/phlipper/chef-denyhosts.png?branch=master)](https://travis-ci.org/phlipper/chef-denyhosts)
 
 ## Description
 

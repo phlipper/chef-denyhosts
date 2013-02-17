@@ -11,4 +11,4 @@
 # the following line prevents DenyHosts from blocking the host foo
 # foo
 
-<%= node[:denyhosts][:allowed_hosts].join("\n") %>
+<%= node["denyhosts"]["allowed_hosts"].join("\n") %>

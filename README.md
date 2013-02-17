@@ -1,11 +1,13 @@
-# DESCRIPTION
+# chef-denyhosts
+
+## Description
 
 Installs the denyhosts package from (http://denyhosts.sourceforge.net/). Currently only targeting Ubuntu platform. It's not complicated and would work on other platforms, but that can come later.
 
 
-# REQUIREMENTS
+## Requirements
 
-## Supported Platforms
+### Supported Platforms
 
 The following platforms are supported by this cookbook, meaning that the recipes run on these platforms without error:
 
@@ -14,65 +16,71 @@ The following platforms are supported by this cookbook, meaning that the recipes
 * RedHat
 * CentOS
 
+### Chef
 
-# ATTRIBUTES
+It is recommended to use a version of Chef `>= 10.16.4` as that is the target of my usage and testing, though this should work with most recent versions.
 
-## `admin_email`
+### Ruby
 
-Email address that will receive notifications.
+This cookbook should work on Ruby 1.8.7+ but Ruby 1.9+ is preferred. This cookbook is tested against:
 
-The default is `root@localhost`.
-
-## `smtp_host`
-
-SMTP server hostname to use for outgoing mail.
-
-The default is `localhost`.
-
-## `smtp_port`
-
-SMTP server port number to use for outgoing mail.
-
-The default is `25`.
-
-## `smtp_from`
-
-Email address that will be used to send outgoing mail
-
-The default is `denyhosts@localhost`.
-
-## `allowed_hosts`
-
-Hostnames that will always be allowed to connect.
-
-The default is `[]`.
-
-## `secure_log`
-
-The log file that contains sshd logging info.
-
-The default is based on your platform.
+* 1.8.7
+* 1.9.2
+* 1.9.3
 
 
-# USAGE
+## Usage
 
-This cookbook installs denyhosts if not present and pulls updates if it is installed on the system.
+This cookbook installs the Denyhosts components if not present, and pulls updates if they are installed on the system.
 
 
-# LICENSE and AUTHOR:
+## Attributes
 
-Author:: Phil Cohen (<github@phlippers.net>)
+```ruby
+default["denyhosts"]["admin_email"]   = "root@localhost"  # Email address that will receive notifications.
+default["denyhosts"]["smtp_host"]     = "localhost"  # SMTP server hostname to use for outgoing mail.
+default["denyhosts"]["smtp_port"]     = "25"  # SMTP server port number to use for outgoing mail.
+default["denyhosts"]["smtp_from"]     = "denyhosts@localhost"  # Email address that will be used to send outgoing mail.
+default["denyhosts"]["allowed_hosts"] = []  # Hostnames that will always be allowed to connect.
+default["denyhosts"]["secure_log"]    = case node['platform_family']  # The log file that contains sshd logging info.
+                                        when "rhel", "fedora"
+                                          "/var/log/secure"
+                                        when "freebsd", "openbsd"
+                                          "/var/log/auth.log"
+                                        when "suse"
+                                          "/var/log/messages"
+                                        when "mac_os_x"
+                                          "/private/var/log/asl.log"
+                                        when "debian"
+                                          "/var/log/auth.log"
+                                        else
+                                          "/var/log/auth.log"
+                                        end
+```
 
-Copyright:: 2011, Phil Cohen
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+## Contributing
 
-    http://www.apache.org/licenses/LICENSE-2.0
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Added some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+
+## Contributors
+
+Many thanks go to the following [contributors](https://github.com/phlipper/chef-denyhosts/graphs/contributors) who have helped to make this cookbook even better:
+
+* **[@dwradcliffe](https://github.com/dwradcliffe)**
+    * add attribute for secure log location
+    * restart service when config changes
+
+
+## License
+
+**chef-denyhosts**
+
+* Freely distributable and licensed under the [MIT license](http://phlipper.mit-license.org/2011-2013/license.html).
+* Copyright (c) 2011-2013 Phil Cohen (github@phlippers.net) [![endorse](http://api.coderwall.com/phlipper/endorsecount.png)](http://coderwall.com/phlipper)
+* http://phlippers.net/

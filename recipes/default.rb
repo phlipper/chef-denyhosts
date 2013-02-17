@@ -2,6 +2,7 @@
 # Cookbook Name:: denyhosts
 # Recipe:: default
 #
+# Copyright 2011-2013, Phil Cohen <github@phlippers.net>
 
 package "denyhosts"
 

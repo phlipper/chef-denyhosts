@@ -1,6 +1,6 @@
 maintainer       "Phil Cohen"
 maintainer_email "github@phlippers.net"
-license          "Apache 2.0"
+license          "MIT"
 description      "Installs denyhosts"
 version          "0.1"
 

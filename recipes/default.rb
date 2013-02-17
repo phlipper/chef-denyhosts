@@ -10,6 +10,7 @@ template "/etc/denyhosts.conf" do
   owner  "root"
   group  "root"
   action :create
+  notifies :restart, "service[denyhosts]", :immediately
 end
 
 template "/var/lib/denyhosts/allowed-hosts" do

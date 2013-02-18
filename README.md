@@ -83,6 +83,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
 * **[@dwradcliffe](https://github.com/dwradcliffe)**
     * add attribute for secure log location
     * restart service when config changes
+    * add attribute for lock file
 
 
 ## License

@@ -199,11 +199,14 @@ HOSTNAME_LOOKUP=YES
 #LOCK_FILE = /var/lock/subsys/denyhosts
 #
 # Debian
-LOCK_FILE = /var/run/denyhosts.pid
+#LOCK_FILE = /var/run/denyhosts.pid
 #
 # Misc
 #LOCK_FILE = /tmp/denyhosts.lock
 #
+
+LOCK_FILE = <%= node["denyhosts"]["lock_file"] %>
+
 ######################################################################
 
 

@@ -56,6 +56,14 @@ default["denyhosts"]["secure_log"]    = case node['platform_family']  # The log 
                                         else
                                           "/var/log/auth.log"
                                         end
+default["denyhosts"]["lock_file"]     = case node['platform_family']  # The pid file for the denyhosts daemon.
+                                        when "rhel", "fedora"
+                                          "/var/lock/subsys/denyhosts"
+                                        when "debian"
+                                          "/var/run/denyhosts.pid"
+                                        else
+                                          "/tmp/denyhosts.lock"
+                                        end
 ```
 
 

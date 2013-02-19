@@ -14,7 +14,15 @@ template "/etc/denyhosts.conf" do
   notifies :restart, "service[denyhosts]", :immediately
 end
 
-template "/var/lib/denyhosts/allowed-hosts" do
+directory node["denyhosts"]["work_dir"] do
+  owner "root"
+  group "root"
+  mode 00755
+  action :create
+  recursive true
+end
+
+template File.join(node["denyhosts"]["work_dir"], "allowed-hosts") do
   source "allowed-hosts.erb"
   owner  "root"
   group  "root"

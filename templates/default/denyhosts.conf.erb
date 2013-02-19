@@ -154,7 +154,7 @@ DENY_THRESHOLD_RESTRICTED = 1
 # Note: it is recommended that you use an absolute pathname
 # for this value (eg. /home/foo/denyhosts/data)
 #
-WORK_DIR = /var/lib/denyhosts
+WORK_DIR = <%= node["denyhosts"]["work_dir"] %>
 #
 #######################################################################
 

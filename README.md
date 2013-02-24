@@ -41,6 +41,7 @@ default["denyhosts"]["admin_email"]   = "root@localhost"  # Email address that w
 default["denyhosts"]["smtp_host"]     = "localhost"  # SMTP server hostname to use for outgoing mail.
 default["denyhosts"]["smtp_port"]     = "25"  # SMTP server port number to use for outgoing mail.
 default["denyhosts"]["smtp_from"]     = "denyhosts@localhost"  # Email address that will be used to send outgoing mail.
+default["denyhosts"]["work_dir"]      = "/var/lib/denyhosts"  # Working dir for denyhosts daemon.
 default["denyhosts"]["allowed_hosts"] = []  # Hostnames that will always be allowed to connect.
 default["denyhosts"]["secure_log"]    = case node['platform_family']  # The log file that contains sshd logging info.
                                         when "rhel", "fedora"

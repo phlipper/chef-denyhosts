@@ -85,6 +85,7 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add attribute for secure log location
     * restart service when config changes
     * add attribute for lock file
+    * add `work_dir` attribute and ensure the working dir exists
 
 
 ## License

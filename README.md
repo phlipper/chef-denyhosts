@@ -89,6 +89,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * restart service when config changes
     * add attribute for lock file
     * add `work_dir` attribute and ensure the working dir exists
+* **[@dougbarth](https://github.com/dougbarth)**
+    * expose purge settings as attributes
 
 
 ## License

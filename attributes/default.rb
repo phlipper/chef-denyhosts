@@ -35,3 +35,6 @@ default["denyhosts"]["lock_file"]     = case node['platform_family']
                                         else
                                           "/tmp/denyhosts.lock"
                                         end
+
+default["denyhosts"]["purge_deny"]      = nil
+default["denyhosts"]["purge_threshold"] = 0

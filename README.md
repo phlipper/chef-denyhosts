@@ -65,6 +65,9 @@ default["denyhosts"]["lock_file"]     = case node['platform_family']  # The pid 
                                         else
                                           "/tmp/denyhosts.lock"
                                         end
+
+default["denyhosts"]["purge_deny"]      = nil  # The time after which a denial should be removed.
+default["denyhosts"]["purge_threshold"] = 0  # The number of times after which a denial becomes permanent.
 ```
 
 

@@ -59,7 +59,7 @@ HOSTS_DENY = /etc/hosts.deny
 #            'y' = years
 #
 # never purge:
-PURGE_DENY =
+PURGE_DENY = <%= node["denyhosts"]["purge_deny"] %>
 #
 # purge entries older than 1 week
 #PURGE_DENY = 1w
@@ -80,6 +80,7 @@ PURGE_DENY =
 # a denied host will be purged at most 2 times.
 #PURGE_THRESHOLD = 2
 #
+PURGE_THRESHOLD = <%= node["denyhosts"]["purge_threshold"] %>
 #######################################################################
 
 

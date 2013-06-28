@@ -28,6 +28,7 @@ template File.join(node["denyhosts"]["work_dir"], "allowed-hosts") do
   group  "root"
   mode   "0644"
   action :create
+  notifies :restart, "service[denyhosts]", :immediately
 end
 
 service "denyhosts" do

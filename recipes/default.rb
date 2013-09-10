@@ -6,6 +6,11 @@
 
 package "denyhosts"
 
+service "denyhosts" do
+  supports :restart => true
+  action [:enable, :start]
+end
+
 template "/etc/denyhosts.conf" do
   source "denyhosts.conf.erb"
   owner  "root"
@@ -17,7 +22,7 @@ end
 directory node["denyhosts"]["work_dir"] do
   owner "root"
   group "root"
-  mode 00755
+  mode  "0755"
   action :create
   recursive true
 end
@@ -29,9 +34,4 @@ template File.join(node["denyhosts"]["work_dir"], "allowed-hosts") do
   mode   "0644"
   action :create
   notifies :restart, "service[denyhosts]", :immediately
-end
-
-service "denyhosts" do
-  supports :restart => true
-  action [ :enable, :start ]
 end

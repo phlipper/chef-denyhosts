@@ -37,37 +37,69 @@ This cookbook installs the Denyhosts components if not present, and pulls update
 ## Attributes
 
 ```ruby
-default["denyhosts"]["admin_email"]   = "root@localhost"  # Email address that will receive notifications.
-default["denyhosts"]["smtp_host"]     = "localhost"  # SMTP server hostname to use for outgoing mail.
-default["denyhosts"]["smtp_port"]     = "25"  # SMTP server port number to use for outgoing mail.
-default["denyhosts"]["smtp_from"]     = "denyhosts@localhost"  # Email address that will be used to send outgoing mail.
-default["denyhosts"]["work_dir"]      = "/var/lib/denyhosts"  # Working dir for denyhosts daemon.
 default["denyhosts"]["allowed_hosts"] = []  # Hostnames that will always be allowed to connect.
-default["denyhosts"]["secure_log"]    = case node['platform_family']  # The log file that contains sshd logging info.
-                                        when "rhel", "fedora"
-                                          "/var/log/secure"
-                                        when "freebsd", "openbsd"
-                                          "/var/log/auth.log"
-                                        when "suse"
-                                          "/var/log/messages"
-                                        when "mac_os_x"
-                                          "/private/var/log/asl.log"
-                                        when "debian"
-                                          "/var/log/auth.log"
-                                        else
-                                          "/var/log/auth.log"
-                                        end
-default["denyhosts"]["lock_file"]     = case node['platform_family']  # The pid file for the denyhosts daemon.
-                                        when "rhel", "fedora"
-                                          "/var/lock/subsys/denyhosts"
-                                        when "debian"
-                                          "/var/run/denyhosts.pid"
-                                        else
-                                          "/tmp/denyhosts.lock"
-                                        end
 
-default["denyhosts"]["purge_deny"]      = nil  # The time after which a denial should be removed.
-default["denyhosts"]["purge_threshold"] = 0  # The number of times after which a denial becomes permanent.
+default["denyhosts"]["config"]["admin_email"]     = "root@localhost"  # Email address that will receive notifications.
+default["denyhosts"]["config"]["smtp_host"]       = "localhost"  # SMTP server hostname to use for outgoing mail.
+default["denyhosts"]["config"]["smtp_port"]       = "25"  # SMTP server port number to use for outgoing mail.
+default["denyhosts"]["config"]["smtp_from"]       = "denyhosts@localhost"  # Email address that will be used to send outgoing mail.
+default["denyhosts"]["config"]["smtp_subject"]    = "DenyHosts Report" # Email subject
+default["denyhosts"]["config"]["smtp_username"]   = nil # SMTP username for authentication (if any)
+default["denyhosts"]["config"]["smtp_password"]   = nil # SMTP password for authentication (if any)
+default["denyhosts"]["config"]["smtp_date_format"] = "%a, %d %b %Y %H:%M:%S %z" # Optional custom date format for outgoing mail.
+default["denyhosts"]["config"]["work_dir"]        = "/var/lib/denyhosts"  # Working dir for denyhosts daemon.
+default["denyhosts"]["config"]["purge_deny"]      = nil  # The time after which a denial should be removed.
+default["denyhosts"]["config"]["purge_threshold"] = 0  # The number of times after which a denial becomes permanent.
+default["denyhosts"]["config"]["secure_log"]      = case node['platform_family']  # The log file that contains sshd logging info.
+                                                    when "rhel", "fedora"
+                                                      "/var/log/secure"
+                                                    when "freebsd", "openbsd"
+                                                      "/var/log/auth.log"
+                                                    when "suse"
+                                                      "/var/log/messages"
+                                                    when "mac_os_x"
+                                                      "/private/var/log/asl.log"
+                                                    when "debian"
+                                                      "/var/log/auth.log"
+                                                    else
+                                                      "/var/log/auth.log"
+                                                    end
+default["denyhosts"]["config"]["lock_file"]       = case node['platform_family']  # The pid file for the denyhosts daemon.
+                                                  when "rhel", "fedora"
+                                                    "/var/lock/subsys/denyhosts"
+                                                  when "debian"
+                                                    "/var/run/denyhosts.pid"
+                                                  else
+                                                    "/tmp/denyhosts.lock"
+                                                  end
+
+default["denyhosts"]["config"]["hosts_deny"] = "/etc/hosts.deny" # Your system's restricted access file
+default["denyhosts"]["config"]["block_service"] = "ALL" # Which services to block - see `man 5 hosts_access`
+default["denyhosts"]["config"]["deny_threshold_invalid"] = 3 # Block host after X tries on an invalid user.
+default["denyhosts"]["config"]["deny_threshold_valid"] = 10 # Block host after X tries on a valid user.
+default["denyhosts"]["config"]["deny_threshold_root"] = 1 # Block host after X tries on the root user
+default["denyhosts"]["config"]["deny_threshold_restricted"] = 1 # Block host after X tries on users defined as restricted.
+default["denyhosts"]["config"]["suspicious_login_report_allowed_hosts"] = "YES" # Report suspsicions logins from allowed hosts?
+default["denyhosts"]["config"]["hostname_lookup"] = "YES" # Perform hostname lookup
+default["denyhosts"]["config"]["syslog_report"] = "NO" # Send a log line to syslog?
+default["denyhosts"]["config"]["allowed_hosts_hostname_lookup"] = "NO" # Look up hostnames in allowed-hosts file?
+default["denyhosts"]["config"]["age_reset_valid"] = "5d" # Reset failed login count after X time
+default["denyhosts"]["config"]["age_reset_root"] = "25d" # Reset failed login count after X time
+default["denyhosts"]["config"]["age_reset_restricted"] = "25d" # Reset failed login count after X time
+default["denyhosts"]["config"]["age_reset_invalid"] = "10d" # Reset failed login count after X time
+default["denyhosts"]["config"]["reset_on_success"] = "NO" # Reset failed login count after successful login?
+default["denyhosts"]["config"]["plugin_deny"] = "/usr/bin/true" # File to execute when a host is denied
+default["denyhosts"]["config"]["plugin_purge"] = "/usr/bin/true" # File to execute when a host is purged
+default["denyhosts"]["config"]["userdef_failed_entry_regex"] = nil # Optional additional custom REGEX matcher for failed logins.
+default["denyhosts"]["config"]["daemon_log"] = "/var/log/denyhosts" # Log file for daemon
+default["denyhosts"]["config"]["daemon_log_time_format"] = "%b %d %I:%M:%S" # Time format for daemon log file
+default["denyhosts"]["config"]["daemon_sleep"] = "30s" # Sleep interval for daemon log polling
+default["denyhosts"]["config"]["daemon_purge"] = "1h" # How often the daemon should run the purge routine
+default["denyhosts"]["config"]["sync_server"] = "http://xmlrpc.denyhosts.net:9911" # DenyHosts sync server to use (set to enable)
+default["denyhosts"]["config"]["sync_interval"] = "1h" # How often to speak to sync server, if enabled
+default["denyhosts"]["config"]["sync_upload"] = "YES" # Share your DenyHosts data?
+default["denyhosts"]["config"]["sync_download"] = "YES" # Use public DenyHosts data?
+default["denyhosts"]["config"]["sync_download_threshold"] = 3 # When sync is enabled, X hosts must blacklist before you blacklist
 ```
 
 

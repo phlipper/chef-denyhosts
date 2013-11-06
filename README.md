@@ -123,6 +123,8 @@ Many thanks go to the following [contributors](https://github.com/phlipper/chef-
     * add `work_dir` attribute and ensure the working dir exists
 * **[@dougbarth](https://github.com/dougbarth)**
     * expose purge settings as attributes
+* **[@evan2645](https://github.com/evan2645)**
+    * remove `denyhosts.conf` template in favor of a config hash
 
 
 ## License
